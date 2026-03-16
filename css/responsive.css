@@ -1,0 +1,66 @@
+/* Responsive Styles - 响应式适配 */
+
+/* PC端适配 */
+@media (min-width: 768px) {
+    .container {
+        max-width: 600px;
+        padding: var(--spacing-xl);
+    }
+
+    .header {
+        padding: var(--spacing-xxl) 0 var(--spacing-xl);
+    }
+
+    .header-title {
+        font-size: 1.75rem;
+    }
+
+    .form-card {
+        padding: var(--spacing-xxl);
+    }
+
+    .result-value {
+        font-size: 2.5rem;
+    }
+
+    .result-value.new {
+        font-size: 2.75rem;
+    }
+}
+
+/* 小屏幕适配 */
+@media (max-width: 360px) {
+    :root {
+        --spacing-lg: 14px;
+        --spacing-xl: 18px;
+        --spacing-xxl: 20px;
+    }
+
+    .result-value {
+        font-size: 1.75rem;
+    }
+
+    .result-value.new {
+        font-size: 2rem;
+    }
+}
+
+/* 横屏适配 */
+@media (max-height: 600px) and (orientation: landscape) {
+    .header {
+        padding: var(--spacing-md) 0;
+    }
+
+    .header-title {
+        font-size: 1.25rem;
+    }
+
+    .header-subtitle {
+        display: none;
+    }
+}
+
+/* 深色模式支持（可选） */
+@media (prefers-color-scheme: dark) {
+    /* 可根据需要添加深色模式样式 */
+}

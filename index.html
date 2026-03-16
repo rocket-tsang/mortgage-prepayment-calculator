@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="房贷提前还款计算器 - 帮您快速计算提前还款后的月供变化">
+    <meta name="keywords" content="房贷计算器,提前还款,等额本息,等额本金">
+    <title>房贷提前还款计算器</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/result.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1 class="header-title">房贷提前还款计算器</h1>
+            <p class="header-subtitle">快速计算提前还款后的月供变化</p>
+        </header>
+
+        <!-- 表单区域 -->
+        <form id="calculatorForm" class="form-card">
+            <!-- 贷款金额 -->
+            <div class="form-group">
+                <label class="form-label form-label-required" for="loanAmount">贷款金额</label>
+                <div class="input-wrapper">
+                    <input
+                        type="number"
+                        id="loanAmount"
+                        name="loanAmount"
+                        class="form-input"
+                        placeholder="请输入贷款金额"
+                        min="10000"
+                        max="10000000"
+                        step="10000"
+                        value="1000000"
+                        required
+                    >
+                    <span class="input-unit">元</span>
+                </div>
+                <p class="error-message" id="loanAmountError"></p>
+            </div>
+
+            <!-- 年利率 -->
+            <div class="form-group">
+                <label class="form-label form-label-required" for="interestRate">年利率</label>
+                <div class="input-wrapper">
+                    <input
+                        type="number"
+                        id="interestRate"
+                        name="interestRate"
+                        class="form-input"
+                        placeholder="请输入年利率"
+                        min="0.1"
+                        max="20"
+                        step="0.01"
+                        value="4.9"
+                        required
+                    >
+                    <span class="input-unit">%</span>
+                </div>
+                <p class="error-message" id="interestRateError"></p>
+            </div>
+
+            <!-- 贷款期限 -->
+            <div class="form-group">
+                <label class="form-label form-label-required">
+                    贷款期限
+                    <div class="toggle-group" id="termUnitToggle">
+                        <button type="button" class="toggle-btn active" data-value="year">年</button>
+                        <button type="button" class="toggle-btn" data-value="month">月</button>
+                    </div>
+                </label>
+                <div class="input-wrapper">
+                    <input
+                        type="number"
+                        id="loanTerm"
+                        name="loanTerm"
+                        class="form-input"
+                        placeholder="请输入贷款期限"
+                        min="1"
+                        max="360"
+                        step="1"
+                        value="30"
+                        required
+                    >
+                    <span class="input-unit" id="termUnitDisplay">年</span>
+                </div>
+                <p class="error-message" id="loanTermError"></p>
+            </div>
+
+            <!-- 已还款期数 -->
+            <div class="form-group">
+                <label class="form-label form-label-required" for="paidMonths">已还款期数</label>
+                <div class="input-wrapper">
+                    <input
+                        type="number"
+                        id="paidMonths"
+                        name="paidMonths"
+                        class="form-input"
+                        placeholder="请输入已还款期数"
+                        min="0"
+                        step="1"
+                        value="60"
+                        required
+                    >
+                    <span class="input-unit">期</span>
+                </div>
+                <p class="error-message" id="paidMonthsError"></p>
+            </div>
+
+            <!-- 提前还款金额 -->
+            <div class="form-group">
+                <label class="form-label form-label-required" for="prepaymentAmount">提前还款金额</label>
+                <div class="input-wrapper">
+                    <input
+                        type="number"
+                        id="prepaymentAmount"
+                        name="prepaymentAmount"
+                        class="form-input"
+                        placeholder="请输入提前还款金额"
+                        min="10000"
+                        step="10000"
+                        value="200000"
+                        required
+                    >
+                    <span class="input-unit">元</span>
+                </div>
+                <p class="error-message" id="prepaymentAmountError"></p>
+            </div>
+
+            <!-- 还款方式 -->
+            <div class="form-group">
+                <label class="form-label">还款方式</label>
+                <div class="radio-group" id="repaymentTypeGroup">
+                    <label class="radio-item selected" data-value="equal_payment">
+                        <svg class="radio-icon" viewBox="0 0 18 18">
+                            <circle class="outer" cx="9" cy="9" r="8"></circle>
+                            <circle class="inner" cx="9" cy="9" r="4"></circle>
+                        </svg>
+                        <div>
+                            <div class="radio-label">等额本息</div>
+                            <div class="radio-desc">每月还款金额固定</div>
+                        </div>
+                    </label>
+                    <label class="radio-item" data-value="equal_principal">
+                        <svg class="radio-icon" viewBox="0 0 18 18">
+                            <circle class="outer" cx="9" cy="9" r="8"></circle>
+                            <circle class="inner" cx="9" cy="9" r="4"></circle>
+                        </svg>
+                        <div>
+                            <div class="radio-label">等额本金</div>
+                            <div class="radio-desc">每月还款本金固定，利息递减</div>
+                        </div>
+                    </label>
+                </div>
+                <input type="hidden" id="repaymentType" name="repaymentType" value="equal_payment">
+            </div>
+
+            <!-- 提前还款方式 -->
+            <div class="form-group">
+                <label class="form-label">提前还款方式</label>
+                <div class="radio-group" id="prepaymentTypeGroup">
+                    <label class="radio-item selected" data-value="reduce_payment">
+                        <svg class="radio-icon" viewBox="0 0 18 18">
+                            <circle class="outer" cx="9" cy="9" r="8"></circle>
+                            <circle class="inner" cx="9" cy="9" r="4"></circle>
+                        </svg>
+                        <div>
+                            <div class="radio-label">期限不变，减少月供</div>
+                            <div class="radio-desc">剩余还款期限不变，每月还款减少</div>
+                        </div>
+                    </label>
+                    <label class="radio-item" data-value="shorten_term">
+                        <svg class="radio-icon" viewBox="0 0 18 18">
+                            <circle class="outer" cx="9" cy="9" r="8"></circle>
+                            <circle class="inner" cx="9" cy="9" r="4"></circle>
+                        </svg>
+                        <div>
+                            <div class="radio-label">月供不变，缩短期限</div>
+                            <div class="radio-desc">保持月供金额，缩短还款期限</div>
+                        </div>
+                    </label>
+                </div>
+                <input type="hidden" id="prepaymentType" name="prepaymentType" value="reduce_payment">
+            </div>
+
+            <!-- 提交按钮 -->
+            <button type="submit" class="submit-btn">立即计算</button>
+        </form>
+
+        <!-- 结果区域 -->
+        <div id="resultSection" class="result-section">
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/result.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

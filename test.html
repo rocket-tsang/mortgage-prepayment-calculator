@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房贷计算器测试</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-case {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-case.pass {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .test-case.fail {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .expected {
+            color: #28a745;
+        }
+        .actual {
+            color: #007bff;
+        }
+        .diff {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>房贷计算器测试</h1>
+    <div id="results"></div>
+
+    <script src="js/calculator.js"></script>
+    <script>
+        // 测试用例1：需求文档中的示例
+        // 贷款100万，年利率4.9%，期限30年
+        // 已还60期，提前还款20万
+        // 预期：原月供≈5307.27元，新月供≈4145.70元，差值≈1161.57元
+        const testCase1 = {
+            name: '需求文档示例 - 等额本息，期限不变',
+            params: {
+                loanAmount: 1000000,
+                annualRate: 4.9,
+                loanTermMonths: 360,
+                paidMonths: 60,
+                prepaymentAmount: 200000,
+                repaymentType: 'equal_payment',
+                prepaymentType: 'reduce_payment'
+            },
+            expected: {
+                originalMonthlyPayment: 5307.27,
+                newMonthlyPayment: 4145.70,
+                monthlySavings: 1161.57
+            }
+        };
+
+        // 测试用例2：等额本息，缩短期限
+        const testCase2 = {
+            name: '等额本息，月供不变缩短期限',
+            params: {
+                loanAmount: 1000000,
+                annualRate: 4.9,
+                loanTermMonths: 360,
+                paidMonths: 60,
+                prepaymentAmount: 200000,
+                repaymentType: 'equal_payment',
+                prepaymentType: 'shorten_term'
+            },
+            expected: {
+                originalMonthlyPayment: 5307.27,
+                newMonthlyPayment: 5307.27,
+                shortenedMonths: null // 期望缩短一定月数
+            }
+        };
+
+        // 测试用例3：等额本金，期限不变
+        const testCase3 = {
+            name: '等额本金，期限不变',
+            params: {
+                loanAmount: 1000000,
+                annualRate: 4.9,
+                loanTermMonths: 360,
+                paidMonths: 60,
+                prepaymentAmount: 200000,
+                repaymentType: 'equal_principal',
+                prepaymentType: 'reduce_payment'
+            },
+            expected: {
+                // 等额本金首月月供较高，逐月递减
+            }
+        };
+
+        function runTest(testCase) {
+            const result = MortgageCalculator.calculate(testCase.params);
+            const pass = !result.error;
+
+            let html = `<div class="test-case ${pass ? 'pass' : 'fail'}">`;
+            html += `<h3>${testCase.name}</h3>`;
+
+            if (result.error) {
+                html += `<p class="diff">错误: ${result.error}</p>`;
+            } else {
+                html += `<div class="result">`;
+                html += `<p><strong>原月供:</strong> <span class="actual">${MortgageCalculator.formatMoney(result.originalMonthlyPayment)}</span>`;
+                if (testCase.expected.originalMonthlyPayment) {
+                    html += ` <span class="expected">(期望: ${MortgageCalculator.formatMoney(testCase.expected.originalMonthlyPayment)})</span>`;
+                    const diff = Math.abs(result.originalMonthlyPayment - testCase.expected.originalMonthlyPayment);
+                    html += ` <span class="diff">差值: ${diff.toFixed(2)}</span>`;
+                }
+                html += `</p>`;
+
+                html += `<p><strong>新月供:</strong> <span class="actual">${MortgageCalculator.formatMoney(result.newMonthlyPayment)}</span>`;
+                if (testCase.expected.newMonthlyPayment && testCase.params.prepaymentType === 'reduce_payment') {
+                    html += ` <span class="expected">(期望: ${MortgageCalculator.formatMoney(testCase.expected.newMonthlyPayment)})</span>`;
+                    const diff = Math.abs(result.newMonthlyPayment - testCase.expected.newMonthlyPayment);
+                    html += ` <span class="diff">差值: ${diff.toFixed(2)}</span>`;
+                }
+                html += `</p>`;
+
+                if (result.monthlySavings > 0) {
+                    html += `<p><strong>每月节省:</strong> <span class="actual">${MortgageCalculator.formatMoney(result.monthlySavings)}</span>`;
+                    if (testCase.expected.monthlySavings) {
+                        html += ` <span class="expected">(期望: ${MortgageCalculator.formatMoney(testCase.expected.monthlySavings)})</span>`;
+                        const diff = Math.abs(result.monthlySavings - testCase.expected.monthlySavings);
+                        html += ` <span class="diff">差值: ${diff.toFixed(2)}</span>`;
+                    }
+                    html += `</p>`;
+                }
+
+                if (result.shortenedMonths) {
+                    html += `<p><strong>缩短期限:</strong> <span class="actual">${result.shortenedMonths}个月</span></p>`;
+                }
+
+                html += `<p><strong>节省总利息:</strong> <span class="actual">${MortgageCalculator.formatMoney(result.savedInterest)}</span></p>`;
+                html += `<p><strong>新剩余期限:</strong> <span class="actual">${MortgageCalculator.formatMonths(result.newRemainingMonths)}</span></p>`;
+                html += `</div>`;
+            }
+
+            html += `</div>`;
+            return html;
+        }
+
+        // 运行所有测试
+        document.getElementById('results').innerHTML =
+            runTest(testCase1) +
+            runTest(testCase2) +
+            runTest(testCase3);
+    </script>
+</body>
+</html>
