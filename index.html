@@ -3,26 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="房贷提前还款计算器 - 帮您快速计算提前还款后的月供变化">
-    <meta name="keywords" content="房贷计算器,提前还款,等额本息,等额本金">
-    <title>房贷提前还款计算器</title>
+    <meta name="description" content="专业房贷提前还款计算器 - 在线计算提前还贷后月供变化、节省利息及还款周期调整。支持等额本息和等额本金两种还款方式，帮您制定最优提前还款计划。">
+    <meta name="keywords" content="房贷计算器,提前还款计算器,等额本息,等额本金,提前还贷,房贷月供计算,利息节省计算,按揭贷款计算">
+    <meta name="author" content="房贷计算器工具">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="房贷提前还款计算器 - 在线房贷优化工具">
+    <meta property="og:description" content="专业房贷提前还款计算器 - 在线计算提前还贷后月供变化、节省利息及还款周期调整。支持等额本息和等额本金两种还款方式，帮您制定最优提前还款计划。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/mortgage-calculator">
+    <link rel="canonical" href="https://yourdomain.com/mortgage-calculator">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebApplication",
+        "name": "房贷提前还款计算器",
+        "description": "专业的房贷提前还款计算器，支持等额本息和等额本金两种还款方式，帮助用户计算提前还贷后月供变化、节省利息及还款周期调整",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "房贷计算器工具"
+        },
+        "datePublished": "2025-01-01",
+        "dateModified": "2025-01-01"
+    }
+    </script>
+    <title>房贷提前还款计算器 - 免费房贷优化工具 | 节省利息计算</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/result.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/seo.css">
 </head>
 <body>
     <div class="container">
         <!-- 头部 -->
         <header class="header">
             <h1 class="header-title">房贷提前还款计算器</h1>
-            <p class="header-subtitle">快速计算提前还款后的月供变化</p>
+            <p class="header-subtitle">精准计算提前还贷节省的利息与月供变化</p>
         </header>
 
+        <!-- SEO说明区域 -->
+        <section class="seo-info">
+            <div class="info-container">
+                <h2>房贷提前还款计算指南</h2>
+                <p>房贷提前还款是减轻利息负担的有效方式。通过我们的计算器，您可以轻松掌握：<strong>提前还款后的月供变化</strong>、<strong>节省的总利息</strong>和<strong>还款期限调整</strong>等多种情况下的计算结果。无论您选择保持期限不变降低月供，还是保持月供不变缩短还款期限，都能帮助您做出更明智的财务决策。</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>什么是等额本息？</h3>
+                        <p>每月还款金额相同，包含本月应还的本金和利息。前期主要是支付利息，后期逐渐转换为归还本金。适合收入相对固定的借款人。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>什么是等额本金？</h3>
+                        <p>每月还款的本金相同，加上当月利息组成总月供。由于本金部分逐月减少，利息也相应减少，整体月供递减。总利息支出较少。</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>提前还款优势</h3>
+                        <p>提前还款可以显著减少您的总利息支出，根据计算结果显示具体节省金额。同时缩短还款时间，减轻长期财务压力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 重要说明 -->
+        <section class="important-note">
+            <div class="info-container note-content">
+                <h3>房贷提前还款小贴士</h3>
+                <ul>
+                    <li><strong>最佳时机</strong>：通常建议在还贷前1/3期限内提前还款，因前期主要还利息，提前还款效益最大</li>
+                    <li><strong>资金规划</strong>：提前还款应量力而行，确保不影响日常资金周转和投资规划</li>
+                    <li><strong>两种方式比较</strong>：减少月供适合现金流紧张的情况；缩短期限适合希望快速结束还贷的人群</li>
+                    <li><strong>银行规定</strong>：各银行对提前还款规定不同，请提前了解相关手续费和最低还款额度要求</li>
+                </ul>
+            </div>
+        </section>
+
         <!-- 表单区域 -->
-        <form id="calculatorForm" class="form-card">
+        <form id="calculatorForm" class="form-card" itemscope itemtype="http://schema.org/WebCalculator">
+            <h2 itemprop="name" style="display: none;">房贷提前还款计算器</h2>
             <!-- 贷款金额 -->
             <div class="form-group">
                 <label class="form-label form-label-required" for="loanAmount">贷款金额</label>
@@ -32,6 +100,7 @@
                         id="loanAmount"
                         name="loanAmount"
                         class="form-input"
+                        itemprop="loanAmount"
                         placeholder="请输入贷款金额"
                         min="10000"
                         max="10000000"
@@ -53,6 +122,7 @@
                         id="interestRate"
                         name="interestRate"
                         class="form-input"
+                        itemprop="interestRate"
                         placeholder="请输入年利率"
                         min="0.1"
                         max="20"
@@ -80,6 +150,7 @@
                         id="loanTerm"
                         name="loanTerm"
                         class="form-input"
+                        itemprop="loanTerm"
                         placeholder="请输入贷款期限"
                         min="1"
                         max="360"
@@ -196,8 +267,37 @@
         <div id="resultSection" class="result-section">
             <div id="resultContent"></div>
         </div>
-    </div>
 
+        <!-- 底部相关信息 -->
+        <footer class="calculator-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>房贷提前还款计算器功能介绍</h3>
+                    <p>我们提供专业的房贷提前还款计算服务，支持等额本息和等额本金两种常见还款方式。输入您的贷款金额、利率、已还期数以及提前还款金额，系统将为您详细计算提前还款后的所有财务变动情况，包括：</p>
+                    <ul>
+                        <li>原本需还款总额和总利息</li>
+                        <li>提前还贷后的新月还款额（或新还款期限）</li>
+                        <li>可节省的总利息金额</li>
+                        <li>提前还款后的利息对比分析</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>如何有效利用提前还款节省成本</h3>
+                    <p>房贷提前还款可以帮助借款人节省大量利息支出。根据个人财务状况，合理选择“缩短期限”或“减少月供”的提前还款方式。我们推荐以下策略：</p>
+                    <ol>
+                        <li><strong>选择合适的还贷节点</strong>：在贷款的前1/3期限内提前还款，因利息占比大，节省更明显</li>
+                        <li><strong>保留应急资金</strong>：提前还贷前应预留3-6个月的生活开销，保障资金安全</li>
+                        <li><strong>优先高息贷款</strong>：如有多笔贷款，优先偿还利率较高的贷款</li>
+                        <li><strong>关注银行政策</strong>：注意是否有违约金和其他费用，确认性价比后再做决定</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 房贷提前还款计算器 - 专业的房贷优化工具</p>
+                <p>声明：本计算器仅为辅助工具，实际贷款政策请以银行规定为准。</p>
+            </div>
+        </footer>
+    
     <!-- JavaScript -->
     <script src="js/utils.js"></script>
     <script src="js/calculator.js"></script>
