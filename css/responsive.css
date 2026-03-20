@@ -64,3 +64,50 @@
 @media (prefers-color-scheme: dark) {
     /* 可根据需要添加深色模式样式 */
 }
+
+/* 浮动博客按钮 */
+.floating-blog-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: var(--bg-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+    z-index: 1000;
+}
+
+.floating-blog-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(24, 144, 255, 0.24);
+}
+
+.floating-blog-btn:active {
+    transform: translateY(-2px);
+}
+
+.floating-blog-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+    .floating-blog-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .floating-blog-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}

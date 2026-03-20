@@ -2,6 +2,10 @@
 
 一个纯H5版本的房贷提前还款计算器，支持等额本息和等额本金两种还款方式。
 
+- 房贷提前还款计算器演示地址：[https://fd1.gdman.top/](https://fd1.gdman.top/)
+- 房贷计算器演示地址：[https://fd2.gdman.top/](https://fd2.gdman.top/)
+- 作者博客地址： [https://blog.gzsoon.com/](https://blog.gzsoon.com/)
+
 ## 功能特性
 
 - 支持等额本息还款方式
